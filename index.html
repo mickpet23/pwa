@@ -8,5 +8,12 @@
 	<ul>
 		<li>milk</li>
 	</ul>
+	<script type="text/javascript">
+		if ('serviceWorker' in navigator) {
+			navigator.serviceWorker.register('/sw.js').then(() => {
+				console.log('service worker registered')
+			})
+		}
+	</script>
 </body>
 </html>
