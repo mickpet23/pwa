@@ -10,7 +10,7 @@
 	</ul>
 	<script type="text/javascript">
 		if ('serviceWorker' in navigator) {
-			navigator.serviceWorker.register('/sw.js', {scope:'/pwa/'}).then(() => {
+			navigator.serviceWorker.register('/pwa/sw.js', {scope:'/pwa/'}).then(() => {
 				console.log('service worker registered')
 			})
 		}

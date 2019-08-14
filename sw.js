@@ -1,1 +1,1 @@
-console.log('sw.js clocking in')
+console.log('sw.js clocking in');
