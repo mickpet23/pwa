@@ -2,13 +2,17 @@
 
 self.addEventListener('install', event => {
 	event.waitUntil(
-		caches.open('stativ-v1').then(cache => {
+		caches.open('static-v1').then(cache => {
 			return cache.addAll([
 				'/pwa/',
 				'/pwa/index.html'
 			]);
 		})
 	)
+});
+
+self.addEventListener('activate', event => {
+
 });
 
 self.addEventListener('fetch', event => {
