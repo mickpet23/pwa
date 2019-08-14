@@ -1,8 +1,8 @@
-//console.log('sw.js clocking in');
+let staticCacheName = 'expenses-static-v2'
 
 self.addEventListener('install', event => {
 	event.waitUntil(
-		caches.open('static-v1').then(cache => {
+		caches.open('staticCacheName').then(cache => {
 			return cache.addAll([
 				'/pwa/',
 				'/pwa/index.html'
@@ -12,7 +12,18 @@ self.addEventListener('install', event => {
 });
 
 self.addEventListener('activate', event => {
-
+	event.waitUntil(
+		caches.keys().then(cacheNames => {
+			return Promise.all(
+				cacheNames.filter(cacheName => {
+					return cacheName.startsWith('expenses-')&&
+						cacheName != staticCacheName;
+				}).map(cacheName => {
+					return cache.delete(cacheName);
+				})
+			);
+		})
+	);
 });
 
 self.addEventListener('fetch', event => {
