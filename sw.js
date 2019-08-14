@@ -2,7 +2,7 @@ let staticCacheName = 'expenses-static-v2'
 
 self.addEventListener('install', event => {
 	event.waitUntil(
-		caches.open('staticCacheName').then(cache => {
+		caches.open(staticCacheName).then(cache => {
 			return cache.addAll([
 				'/pwa/',
 				'/pwa/index.html'
