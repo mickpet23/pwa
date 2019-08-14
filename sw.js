@@ -1,4 +1,4 @@
-let staticCacheName = 'expenses-static-v2'
+let staticCacheName = 'staples-static-v2'
 
 self.addEventListener('install', event => {
 	event.waitUntil(
@@ -16,7 +16,7 @@ self.addEventListener('activate', event => {
 		caches.keys().then(cacheNames => {
 			return Promise.all(
 				cacheNames.filter(cacheName => {
-					return cacheName.startsWith('expenses-')&&
+					return cacheName.startsWith('staples-')&&
 						cacheName != staticCacheName;
 				}).map(cacheName => {
 					return cache.delete(cacheName);
