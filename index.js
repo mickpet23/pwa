@@ -31,5 +31,38 @@ dbPromise.then(db => {
 	console.log('Added foo:bar to keyval');
 })
 
+dbPromise.then(db => {
+	let tx = db.transaction('people', 'readwrite');
+	let peopleStore = tx.objectStore('people');
+	
+	peopleStore.put({
+		name: 'Sam Munoz',
+		age: 25,
+		favoriteAnimal: 'dog'
+	});
+
+	peopleStore.put({
+		name: 'Susan Keller',
+		age: 34,
+		favoriteAnimal: 'cat'
+	});
+
+	peopleStore.put({
+		name: 'Lillie Wolfe',
+		age: 28,
+		favoriteAnimal: 'dog'
+	});
+
+	peopleStore.put({
+		name: 'Marc Stone',
+		age: 39,
+		favoriteAnimal: 'cat'
+	});
+
+	return tx.complete;
+}).then(() => {
+	console.log('People added');
+})
+
 
 
