@@ -15,6 +15,10 @@
 			})
 		}
 	</script>
-	<script type="text/javascript" src="index.js" type="module"></script>
+	<script type="module">
+		import { openDB, deleteDB, wrap, unwrap } from 'https://unpkg.com/idb?module';
+		console.log('new script tag worked')
+	</script>
+	<script type="text/javascript" src="index.js"></script>
 </body>
 </html>

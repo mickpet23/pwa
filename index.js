@@ -1,8 +1,9 @@
+console.log('index.js loaded successfully');
 //import idb from 'idb';
-const idb = require('idb');
+// const idb = require('idb');
 
-var dbPromise = idb.open('test-db', 1, upgradeDb => {
-	var keyValStore = upgradeDb.createObjectStore('keyval');
-	keyValStore.put('world', 'hello');
-});
+// var dbPromise = idb.open('test-db', 1, upgradeDb => {
+// 	var keyValStore = upgradeDb.createObjectStore('keyval');
+// 	keyValStore.put('world', 'hello');
+// });
 
