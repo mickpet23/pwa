@@ -1,9 +1,9 @@
-console.log('index.js loaded successfully');
+import { openDB, deleteDB, wrap, unwrap } from 'https://unpkg.com/idb?module';
 //import idb from 'idb';
-// const idb = require('idb');
 
-// var dbPromise = idb.open('test-db', 1, upgradeDb => {
-// 	var keyValStore = upgradeDb.createObjectStore('keyval');
-// 	keyValStore.put('world', 'hello');
-// });
+
+var dbPromise = openDB('test-db', 1, upgradeDb => {
+	var keyValStore = upgradeDb.createObjectStore('keyval');
+	keyValStore.put('world', 'hello');
+});
 
