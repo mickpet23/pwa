@@ -3,8 +3,14 @@ import { openDB, deleteDB, wrap, unwrap } from 'https://unpkg.com/idb?module';
 
 let dbPromise = openDB('test-db', 1, {
 	upgrade(dbPromise, oldVersion, newVersion, transaction) {
-		let keyValStore = dbPromise.createObjectStore('keyval')
-		keyValStore.put('world', 'hello')
+		switch(oldVersion) {
+			case 0:
+				let keyValStore = dbPromise.createObjectStore('keyval');
+				keyValStore.put('world', 'hello');
+			case 1:
+				dbPromise.createObjectStore('people', {keyPath: 'name'});		
+		}
+
 	}
 })
 
