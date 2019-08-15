@@ -16,10 +16,14 @@ dbPromise.then(db => {
 	console.log('The value of "hello" is ', val);
 })
 
-// var dbPromise = openDB('test-db', 1, upgradeDb => {
-// 	var keyValStore = upgradeDb.createObjectStore('keyval');
-// 	keyValStore.put('world', 'hello');
-// });
+dbPromise.then(db => {
+	let tx = db.transaction('keyval', 'readwrite');
+	let keyValStore = tx.objectStore('keyval');
+	keyValStore.put('bar', 'foo');
+	return tx.complete;
+}).then(()=> {
+	console.log('Added foo:bar to keyval');
+})
 
 
 
