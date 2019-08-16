@@ -1,7 +1,7 @@
 import { openDB, deleteDB, wrap, unwrap } from 'https://unpkg.com/idb?module';
 //import idb from 'idb';
 
-let dbPromise = openDB('test-db', 1, {
+let dbPromise = openDB('test-db', 2, {
 	upgrade(dbPromise, oldVersion, newVersion, transaction) {
 		switch(oldVersion) {
 			case 0:
@@ -62,6 +62,15 @@ dbPromise.then(db => {
 	return tx.complete;
 }).then(() => {
 	console.log('People added');
+});
+
+dbPromise.then(db => {
+	let tx = db.transanction('people');
+	let peopleStore = tx.objectStore('people');
+
+	return peopleStore.getAll();
+}).then(people => {
+	console.log('People:', people);
 })
 
 
