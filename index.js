@@ -1,7 +1,7 @@
 import { openDB, deleteDB, wrap, unwrap } from 'https://unpkg.com/idb?module';
 //import idb from 'idb';
 
-let dbPromise = openDB('test-db', 3, {
+let dbPromise = openDB('test-db', 4, {
 	upgrade(dbPromise, oldVersion, newVersion, transaction) {
 		switch(oldVersion) {
 			case 0:
@@ -12,7 +12,9 @@ let dbPromise = openDB('test-db', 3, {
 			case 2:
 				let peopleStore = transaction.objectStore('people');
 				peopleStore.createIndex('animal', 'favoriteAnimal');
-				console.log('case 2 triggered')
+			case 3:
+				peopleStore = transaction.objectStore('people');
+				peopleStore.createIndex('age', 'age');
 		}
 	}
 })
@@ -77,6 +79,16 @@ dbPromise.then(db => {
 	return animalIndex.getAll('cat');
 }).then(people => {
 	console.log('People:', people);
+})
+
+dbPromise.then((db) => {
+	let tx = db.transaction('people');
+	let peopleStore = tx.objectStore('people');
+	let ageIndex = peopleStore.index('age');
+
+	return ageIndex.getAll();
+}).then(people => {
+	console.log('People sorted by age:', people);
 })
 
 
