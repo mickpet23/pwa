@@ -10,8 +10,9 @@ let dbPromise = openDB('test-db', 3, {
 			case 1:
 				dbPromise.createObjectStore('people', {keyPath: 'name'});		
 			case 2:
-				let peopleStore = dbPromise.transaction.objectStore('people');
+				let peopleStore = transaction.objectStore('people');
 				peopleStore.createIndex('animal', 'favoriteAnimal');
+				console.log('case 2 triggered')
 		}
 	}
 })
