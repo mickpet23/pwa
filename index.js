@@ -65,7 +65,7 @@ dbPromise.then(db => {
 });
 
 dbPromise.then(db => {
-	let tx = db.transanction('people');
+	let tx = db.transaction('people');
 	let peopleStore = tx.objectStore('people');
 
 	return peopleStore.getAll();
