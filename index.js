@@ -73,7 +73,8 @@ dbPromise.then(db => {
 	let animalIndex = peopleStore.index('animal');
 
 	//return peopleStore.getAll();
-	return animalIndex.getAll();
+	//return animalIndex.getAll();
+	return animalIndex.getAll('cat');
 }).then(people => {
 	console.log('People:', people);
 })
