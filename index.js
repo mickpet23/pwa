@@ -91,5 +91,19 @@ dbPromise.then((db) => {
 	console.log('People sorted by age:', people);
 })
 
+dbPromise.then((db) => {
+	let tx = db.transaction('people');
+	let peopleStore = tx.objectStore('people');
+	let ageIndex = peopleStore.index('age');
+
+	return ageIndex.openCursor();
+}).then(function logPerson(cursor) {
+	if (!cursor) return;
+	console.log('Cursored at:', cursor.value.name);
+	return cursor.continue().then(logPerson);
+}).then(() => {
+	console.log('Done cursoring');
+})
+
 
 
