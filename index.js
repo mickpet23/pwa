@@ -97,9 +97,14 @@ dbPromise.then((db) => {
 	let ageIndex = peopleStore.index('age');
 
 	return ageIndex.openCursor();
+}).then(cursor => {
+	if (!cursor) return;
+	return cursor.advance(2);
 }).then(function logPerson(cursor) {
 	if (!cursor) return;
 	console.log('Cursored at:', cursor.value.name);
+	//cursor.update(newValue)
+	//cursor.delete()
 	return cursor.continue().then(logPerson);
 }).then(() => {
 	console.log('Done cursoring');
